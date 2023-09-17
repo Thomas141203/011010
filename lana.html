@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculateur de temps écoulé</title>
+        <link rel="manifest" href="/manifest.json">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                text-align: center;
+                margin-top: 100px;
+            }
+
+            #resultat {
+                font-size: 24px;
+                color: #000;
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <p id="resultat"></p>
+            <p id="tempsRestant"></p>
+        </div>
+
+        <script>
+            function calculerTempsEcoule() {
+                let dateSaisie = new Date(2019, 9, 11, 19, 25);
+                let dateActuelle = new Date();
+
+                let differenceEnMillisecondes = dateActuelle - dateSaisie;
+
+                let secondes = Math.floor(differenceEnMillisecondes / 1000);
+                let minutes = Math.floor(secondes / 60);
+                let heures = Math.floor(minutes / 60);
+                let jours = Math.floor(heures / 24);
+
+                let annees = Math.floor(jours / 365);
+                let joursRestants = jours % 365;
+
+                let tempsEcoule = "";
+
+                if (annees > 0) {
+                    tempsEcoule += annees + " an" + (annees > 1 ? "s" : "") + ", ";
+                }
+
+                tempsEcoule += joursRestants + " jour" + (joursRestants > 1 ? "s" : "") + ", " + heures % 24 + " heure" + (heures % 24 > 1 ? "s" : "") + ", " + minutes % 60 + " minute" + (minutes % 60 > 1 ? "s" : "") + ", " + secondes % 60 + " seconde" + (secondes % 60 > 1 ? "s" : "") + ".";
+
+                document.getElementById('resultat').innerHTML = "Temps écoulé : " + tempsEcoule;
+
+                let dateProchaine = new Date(dateActuelle.getFullYear(), 9, 9, 19, 25);
+
+                if(dateActuelle.getMonth() > 9 || (dateActuelle.getMonth() === 9 && dateActuelle.getDate() > 9)){
+                    dateProchaine.setFullYear(dateProchaine.getFullYear() + 1);
+                }
+
+                let differenceEnMillisecondesProchaine = dateProchaine - dateActuelle;
+
+                let secondesRestantes = Math.floor(differenceEnMillisecondesProchaine / 1000);
+                let minutesRestantes = Math.floor(secondesRestantes / 60);
+                let heuresRestantes = Math.floor(minutesRestantes / 60);
+                let joursRestantsProchaine = Math.floor(heuresRestantes / 24);
+
+                let tempsRestant = joursRestantsProchaine + " jour" + (joursRestantsProchaine > 1 ? "s" : "") + ", " + heuresRestantes % 24 + " heure" + (heuresRestantes % 24 > 1 ? "s" : "") + ", " + minutesRestantes % 60 + " minute" + (minutesRestantes % 60 > 1 ? "s" : "") + ", " + secondesRestantes % 60 + " seconde" + (secondesRestantes % 60 > 1 ? "s" : "") + ".";
+
+                document.getElementById('tempsRestant').innerHTML = "Temps restant : " + tempsRestant;
+            }
+
+            calculerTempsEcoule();
+            setInterval(calculerTempsEcoule, 1000);
+        </script>
+    </body>
+</html>

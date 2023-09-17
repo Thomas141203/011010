@@ -1,0 +1,16 @@
+{
+    "name": "Calculateur de temps écoulé avec Lana",
+    "short_name": "Calculateur",
+    "description": "Une application pour calculer le temps écoulé et le temps restant avec ma Lana.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f4f4f4",
+    "theme_color": "#333",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
