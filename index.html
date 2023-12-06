@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculateur de temps écoulé</title>
+        <style>
+            body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 0;}
+            .container {text-align: center;margin-top: 100px;}
+            #resultat {font-size: 24px;color: #000;padding: 10px 20px;border-radius: 5px;}
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <p id="resultat"></p>
+            <p id="totalEnJours"></p>
+            <p id="tempsRestant"></p>
+            <p id="dateNaissanceThomas"></p>
+            <p id="dateNaissanceLana"></p>
+            <p id="diffTL"></p>
+        </div>
+
+        <script>
+            function calculerTempsEcoule() {
+                let dateSaisie = new Date(2019, 9, 11, 19, 25); // Vendredi 11 octobre 2019 à 19h25 | 9 car mois[0,11]
+                let dateThomas = new Date(2003, 6, 13, 10, 3);
+                let dateLana = new Date(2003, 4, 12, 22, 10);
+                let dateActuelle = new Date();
+
+                let differenceEnMillisecondes = dateActuelle - dateSaisie;
+
+                let secondes = Math.floor(differenceEnMillisecondes / 1000);
+                let minutes = Math.floor(secondes / 60);
+                let heures = Math.floor(minutes / 60);
+                let jours = heures >= 12 ? Math.floor(heures / 24) + 1 : Math.floor(heures / 24);
+
+                let annees = Math.floor(jours / 365);
+                let joursRestants = jours % 365;
+
+                let tempsEcoule = "";
+
+                if(annees > 0){
+                    tempsEcoule += annees + " an" + (annees > 1 ? "s" : "") + ", ";
+                }
+
+                tempsEcoule += joursRestants + " jour" + (joursRestants > 1 ? "s" : "") + ", " + heures % 24 + " heure" + (heures % 24 > 1 ? "s" : "") + ", " + minutes % 60 + " minute" + (minutes % 60 > 1 ? "s" : "") + ", " + secondes % 60 + " seconde" + (secondes % 60 > 1 ? "s" : "") + ".";
+
+                document.getElementById('resultat').innerHTML = "Temps écoulé : " + tempsEcoule;
+
+                let dateProchaine = new Date(dateActuelle.getFullYear(), 9, 9, 19, 25);
+
+                if(dateActuelle.getMonth() > 9 || (dateActuelle.getMonth() === 9 && dateActuelle.getDate() > 9)){
+                    dateProchaine.setFullYear(dateProchaine.getFullYear() + 1);
+                }
+
+                let differenceEnMillisecondesProchaine = dateProchaine - dateActuelle;
+
+                let secondesRestantes = Math.floor(differenceEnMillisecondesProchaine / 1000);
+                let minutesRestantes = Math.floor(secondesRestantes / 60);
+                let heuresRestantes = Math.floor(minutesRestantes / 60);
+                let joursRestantsProchaine = heuresRestantes >= 12 ? Math.floor(heuresRestantes / 24) + 1 : Math.floor(heuresRestantes / 24);
+
+                let tempsRestant = joursRestantsProchaine + " jour" + (joursRestantsProchaine > 1 ? "s" : "") + ", " + heuresRestantes % 24 + " heure" + (heuresRestantes % 24 > 1 ? "s" : "") + ", " + minutesRestantes % 60 + " minute" + (minutesRestantes % 60 > 1 ? "s" : "") + ", " + secondesRestantes % 60 + " seconde" + (secondesRestantes % 60 > 1 ? "s" : "");
+
+                let differenceEnMillisecondesThomas = dateActuelle - dateThomas;
+                
+                let secondesThomas = Math.floor(differenceEnMillisecondesThomas / 1000);
+                let minutesThomas = Math.floor(secondesThomas / 60);
+                let heuresThomas = Math.floor(minutesThomas / 60);
+                let joursThomas = heuresThomas >= 12 ? Math.floor(heuresThomas / 24) + 1 : Math.floor(heuresThomas / 24);
+
+                let anneesThomas = Math.floor(joursThomas / 365);
+                let joursRestantsThomas = joursThomas % 365;
+
+                let tempsEcouleThomas = "";
+
+                
+                if(anneesThomas > 0){
+                    tempsEcouleThomas += anneesThomas + " an" + (anneesThomas > 1 ? "s" : "") + ", ";
+                }
+
+                tempsEcouleThomas += joursRestantsThomas + " jour" + (joursRestantsThomas > 1 ? "s" : "") + ", " + heuresThomas % 24 + " heure" + (heuresThomas % 24 > 1 ? "s" : "") + ", " + minutesThomas % 60 + " minute" + (minutesThomas % 60 > 1 ? "s" : "") + ", " + secondesThomas % 60 + " seconde" + (secondesThomas % 60 > 1 ? "s" : "");
+
+                let differenceEnMillisecondesLana = dateActuelle - dateLana;
+                
+                let secondesLana = Math.floor(differenceEnMillisecondesLana / 1000);
+                let minutesLana = Math.floor(secondesLana / 60);
+                let heuresLana = Math.floor(minutesLana / 60);
+                let joursLana = heuresLana >= 12 ? Math.floor(heuresLana / 24) + 1 : Math.floor(heuresLana / 24);
+
+                let anneesLana = Math.floor(joursLana / 365);
+                let joursRestantsLana = joursLana % 365;
+
+                let tempsEcouleLana = "";
+                
+                if(anneesLana > 0){
+                    tempsEcouleLana += anneesLana + " an" + (anneesLana > 1 ? "s" : "") + ", ";
+                }
+
+                tempsEcouleLana += joursRestantsLana + " jour" + (joursRestantsLana > 1 ? "s" : "") + ", " + heuresLana % 24 + " heure" + (heuresLana % 24 > 1 ? "s" : "") + ", " + minutesLana % 60 + " minute" + (minutesLana % 60 > 1 ? "s" : "") + ", " + secondesLana % 60 + " seconde" + (secondesLana % 60 > 1 ? "s" : "");
+
+                let differenceEnMillisecondesThomasLana = dateThomas - dateLana;   
+                
+                let secondesThomasLana = Math.floor(differenceEnMillisecondesThomasLana / 1000);
+                let minutesThomasLana = Math.floor(secondesThomasLana / 60);
+                let heuresThomasLana = Math.floor(minutesThomasLana / 60);
+                let joursThomasLana = heuresThomasLana >= 12 ? Math.floor(heuresThomasLana / 24) + 1 : Math.floor(heuresThomasLana / 24);
+
+                let anneesThomasLana = Math.floor(joursThomasLana / 365);
+                let joursRestantsThomasLana = joursThomasLana % 365;
+
+                let tempsEcouleThomasLana = "";
+
+                if(anneesThomasLana > 0){
+                    tempsEcouleThomasLana += anneesThomasLana + " an" + (anneesThomasLana > 1 ? "s" : "") + ", ";
+                }
+
+                tempsEcouleThomasLana += joursRestantsThomasLana + " jour" + (joursRestantsThomasLana > 1 ? "s" : "") + ", " + heuresThomasLana % 24 + " heure" + (heuresThomasLana % 24 > 1 ? "s" : "") + ", " + minutesThomasLana % 60 + " minute" + (minutesThomasLana % 60 > 1 ? "s" : "") + ", " + secondesThomasLana % 60 + " seconde" + (secondesThomasLana % 60 > 1 ? "s" : "");
+
+                document.getElementById('resultat').innerHTML = "Temps écoulé : " + tempsEcoule;
+                document.getElementById('tempsRestant').innerHTML = "Temps restant : " + tempsRestant;
+                document.getElementById('totalEnJours').innerHTML = "Total en jours : " + (heures >= 12 ? jours++ : jours);
+                document.getElementById("dateNaissanceThomas").innerHTML = "Thomas : " + tempsEcouleThomas + " soit " + joursThomas + " jours";
+                document.getElementById("dateNaissanceLana").innerHTML = "Lana : " + tempsEcouleLana  + " soit " + joursLana + " jours";
+                document.getElementById("diffTL").innerHTML = "Différence Thomas/Lana : " + tempsEcouleThomasLana  + " soit juste " + joursThomasLana + " jours";
+            }
+
+            calculerTempsEcoule();
+            setInterval(calculerTempsEcoule, 1000);
+        </script>
+    </body>
+</html>
